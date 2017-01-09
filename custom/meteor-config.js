@@ -33,10 +33,11 @@ app_settings = {
 
   source_suffix: config.source.suffix,
 
-  primary: 'Primary',
-  alternate: 'Alternate',
+  // if you want to add more colour palettes, just add their
+  // name to this array and charts will be classed using this name
+  palettes: ['Primary', 'Alternate'],
 
-  help: 'https://github.com/globeandmail/chart-tool/tree/master/README.md',
+  help: 'http://staging.graphics.stltoday.com/apps/docs-charttool/',
 
   chart: {
     version: app_version,
