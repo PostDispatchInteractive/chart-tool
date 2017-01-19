@@ -1,0 +1,13 @@
+// WEB CHART STYLE TWEAKS
+
+.#{$prefix}chart_source {
+  text-transform: none;
+}
+
+.#{$prefix}bar-label {
+  font-family: $heading-font-family;
+}
+
+h2.edit-indicator { display: none; }
+
+$color-gray-light: #F0F0F0;

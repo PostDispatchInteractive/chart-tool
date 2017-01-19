@@ -98,8 +98,8 @@
   },
 
   "source": {
-    "prefix": "CHART TOOL",
-    "suffix": " » SOURCE:"
+    "prefix": "SOURCE: ",
+    "suffix": ""
   },
 
   "social": {
@@ -107,12 +107,12 @@
       "label": "Facebook",
       "icon": "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg",
       "redirect": "",
-      "appID": ""
+      "appID": "205112096200104"
     },
     "twitter": {
       "label": "Twitter",
       "icon": "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg",
-      "via": "",
+      "via": "stltoday",
       "hashtag": ""
     },
     "email": {
@@ -134,7 +134,7 @@
     "thumbnailWidth": 460
   },
 
-  "embedJS": "http://beta.images.theglobeandmail.com/static/templates/tools/chart-tool/1.2.0/chart-tool.min.js",
-  "embedCSS": "http://beta.images.theglobeandmail.com/static/templates/tools/chart-tool/1.2.0/chart-tool.min.css"
+  "embedJS": "//graphics.stltoday.com/bin/chart-tool/1.2.0/chart-tool.min.js",
+  "embedCSS": "//graphics.stltoday.com/bin/chart-tool/1.2.0/chart-tool.min.css"
 
 }
