@@ -7244,20 +7244,18 @@ function header(container, obj) {
 
   var qualifier;
 
-  if (obj.options.type === 'bar') {
-    if (obj.qualifier !== '' || obj.editable) {
-      qualifier = headerGroup
-        .append('div')
-        .attrs({
-          'class': function () {
-            var str = (obj.prefix) + "chart_qualifier " + (obj.prefix) + "chart_qualifier-bar";
-            if (obj.editable) { str += ' editable-chart_qualifier'; }
-            return str;
-          },
-          'contentEditable': function () { return obj.editable ? true : false; }
-        })
-        .text(obj.qualifier);
-    }
+  if (obj.qualifier !== '' || obj.editable) {
+    qualifier = headerGroup
+      .append('div')
+      .attrs({
+        'class': function () {
+          var str = (obj.prefix) + "chart_qualifier " + (obj.prefix) + "chart_qualifier-bar";
+          if (obj.editable) { str += ' editable-chart_qualifier'; }
+          return str;
+        },
+        'contentEditable': function () { return obj.editable ? true : false; }
+      })
+      .text(obj.qualifier);
   }
 
   var legend;
@@ -9583,71 +9581,6 @@ function plot(node, obj) {
   }
 }
 
-function qualifier(node, obj) {
-
-  var qualifierBg, qualifierText;
-
-  if (obj.options.type !== 'bar') {
-
-    var yAxisNode = node.select(("." + (obj.prefix) + "yAxis"));
-
-    if (obj.editable) {
-
-      var foreignObject = yAxisNode.append('foreignObject')
-        .attrs({
-          'class': ((obj.prefix) + "fo " + (obj.prefix) + "qualifier"),
-          'width': '100%'
-        });
-
-      var foreignObjectGroup = foreignObject.append('xhtml:div')
-        .attr('xmlns', 'http://www.w3.org/1999/xhtml');
-
-      var qualifierField = foreignObjectGroup.append('div')
-        .attrs({
-          'class': ((obj.prefix) + "chart_qualifier editable-chart_qualifier"),
-          'contentEditable': true,
-          'xmlns': 'http://www.w3.org/1999/xhtml'
-        })
-        .text(obj.qualifier);
-
-      foreignObject
-        .attrs({
-          'width': qualifierField.node().getBoundingClientRect().width + 15,
-          'height': qualifierField.node().getBoundingClientRect().height,
-          'transform': ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ", " + (- (qualifierField.node().getBoundingClientRect().height) / 2) + ")")
-        });
-
-    } else {
-
-      qualifierBg = yAxisNode.append('text')
-        .attr('class', ((obj.prefix) + "chart_qualifier-text-bg"))
-        .text(obj.qualifier)
-        .attrs({
-          'dy': '0.32em',
-          'y': obj.yAxis.textY,
-          'transform': ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ", 0)")
-        });
-
-      qualifierText = yAxisNode.append('text')
-        .attr('class', ((obj.prefix) + "chart_qualifier-text"))
-        .text(obj.qualifier)
-        .attrs({
-          'dy': '0.32em',
-          'y': obj.yAxis.textY,
-          'transform': ("translate(" + (obj.dimensions.computedWidth() - obj.dimensions.tickWidth()) + ", 0)")
-        });
-
-    }
-
-  }
-
-  return {
-    qualifierBg: qualifierBg,
-    qualifierText: qualifierText
-  };
-
-}
-
 function bisectData(data, keyVal, stacked, xKey) {
   if (stacked) {
     var arr = [];
@@ -9713,7 +9646,11 @@ function getTipData(obj, cursor) {
   xVal = scale.invert(cursorVal);
 
   if (obj.options.stacked) {
-    var data = obj.data.stackedData;
+    var data = obj.data.stackedData.map(function (item) {
+      return item.sort(function (a, b) {
+        return a.data[obj.data.keys[0]] - b.data[obj.data.keys[0]];
+      });
+    });
     var i$1 = bisectData(data, xVal, obj.options.stacked, obj.data.keys[0]);
 
     var arr = [];
@@ -9725,7 +9662,7 @@ function getTipData(obj, cursor) {
       } else {
         var d0 = data[k][i$1[k] - 1],
           d1 = data[k][i$1[k]];
-        refIndex = xVal - d0.x > d1.x - xVal ? i$1[k] : (i$1[k] - 1);
+        refIndex = xVal - d0.data[obj.data.keys[0]] > d1.data[obj.data.keys[0]] - xVal ? i$1[k] : (i$1[k] - 1);
         arr.push(data[k][refIndex]);
       }
     }
@@ -9733,7 +9670,7 @@ function getTipData(obj, cursor) {
     tipData = arr;
 
   } else {
-    var data$1 = obj.data.data,
+    var data$1 = obj.data.data.sort(function (a, b) { return a.key - b.key; }),
       i$2 = bisectData(data$1, xVal),
       d0$1 = data$1[i$2 - 1],
       d1$1 = data$1[i$2];
@@ -9999,14 +9936,14 @@ function lineChartTips(tipNodes, innerTipEls, obj) {
       .text(function (d) {
         if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
         if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-        if (d.val && d.val !== '__undefined__') {
+        if ((d.val || d.val === 0) && d.val !== '__undefined__') {
           return obj.yAxis.prefix + setTickFormatY(obj.yAxis.format, d.val) + obj.yAxis.suffix;
         } else {
           return 'n/a';
         }
       })
       .classed(((obj.prefix) + "muted"), function (d) {
-        return (!d.val || d.val === '__undefined__');
+        return (!(d.val || d.val === 0) || d.val === '__undefined__');
       });
 
     var bandwidth = 0;
@@ -10119,7 +10056,7 @@ function stackedAreaChartTips(tipNodes, innerTipEls, obj) {
         if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
         if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
         if (obj.rendered.plot.xScaleObj.obj.type === 'ordinal') {
-          if (d.val) {
+          if (d.val || d.val === 0) {
             return obj.yAxis.prefix + setTickFormatY(obj.yAxis.format, d.val) + obj.yAxis.suffix;
           } else {
             return 'n/a';
@@ -10311,14 +10248,14 @@ function columnChartTips(tipNodes, innerTipEls, obj) {
     .text(function (d) {
       if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
       if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-      if (d.val && d.val !== '__undefined__') {
+      if ((d.val || d.val === 0) && d.val !== '__undefined__') {
         return obj.yAxis.prefix + setTickFormatY(obj.yAxis.format, d.val) + obj.yAxis.suffix;
       } else {
         return 'n/a';
       }
     })
     .classed(((obj.prefix) + "muted"), function (d) {
-      return (!d.val || d.val === '__undefined__');
+      return (!(d.val || d.val === 0) || d.val === '__undefined__');
     });
 
   obj.rendered.plot.seriesGroup.selectAll('rect')
@@ -10781,10 +10718,6 @@ var ChartManager = function ChartManager(container, obj) {
   rendered.container = node;
 
   rendered.plot = plot(node, this.recipe);
-
-  if (this.recipe.options.qualifier) {
-    rendered.qualifier = qualifier(node, this.recipe);
-  }
 
   if (this.recipe.options.tips) {
     rendered.tips = tipsManager(node, this.recipe);

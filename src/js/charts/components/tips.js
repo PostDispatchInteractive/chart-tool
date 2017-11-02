@@ -47,7 +47,7 @@ export function getTipData(obj, cursor) {
     const step = scale.step(),
       domainPosition = Math.floor(cursorVal / step);
 
-    if (domainPosition > scale.domain().length) {
+    if (domainPosition >= scale.domain().length) {
       xVal = scale.domain()[scale.domain().length - 1];
     } else {
       xVal = scale.domain()[domainPosition];
@@ -69,7 +69,11 @@ export function getTipData(obj, cursor) {
   xVal = scale.invert(cursorVal);
 
   if (obj.options.stacked) {
-    const data = obj.data.stackedData;
+    const data = obj.data.stackedData.map(item => {
+      return item.sort((a, b) => {
+        return a.data[obj.data.keys[0]] - b.data[obj.data.keys[0]];
+      });
+    });
     const i = bisectData(data, xVal, obj.options.stacked, obj.data.keys[0]);
 
     const arr = [];
@@ -81,7 +85,7 @@ export function getTipData(obj, cursor) {
       } else {
         const d0 = data[k][i[k] - 1],
           d1 = data[k][i[k]];
-        refIndex = xVal - d0.x > d1.x - xVal ? i[k] : (i[k] - 1);
+        refIndex = xVal - d0.data[obj.data.keys[0]] > d1.data[obj.data.keys[0]] - xVal ? i[k] : (i[k] - 1);
         arr.push(data[k][refIndex]);
       }
     }
@@ -89,7 +93,7 @@ export function getTipData(obj, cursor) {
     tipData = arr;
 
   } else {
-    const data = obj.data.data,
+    const data = obj.data.data.sort((a, b) => a.key - b.key),
       i = bisectData(data, xVal),
       d0 = data[i - 1],
       d1 = data[i];
@@ -355,14 +359,14 @@ export function lineChartTips(tipNodes, innerTipEls, obj) {
       .text(d => {
         if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
         if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-        if (d.val && d.val !== '__undefined__') {
+        if ((d.val || d.val === 0) && d.val !== '__undefined__') {
           return obj.yAxis.prefix + yFormatter(obj.yAxis.format, d.val) + obj.yAxis.suffix;
         } else {
           return 'n/a';
         }
       })
       .classed(`${obj.prefix}muted`, d => {
-        return (!d.val || d.val === '__undefined__');
+        return (!(d.val || d.val === 0) || d.val === '__undefined__');
       });
 
     let bandwidth = 0;
@@ -475,7 +479,7 @@ export function stackedAreaChartTips(tipNodes, innerTipEls, obj) {
         if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
         if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
         if (obj.rendered.plot.xScaleObj.obj.type === 'ordinal') {
-          if (d.val) {
+          if (d.val || d.val === 0) {
             return obj.yAxis.prefix + yFormatter(obj.yAxis.format, d.val) + obj.yAxis.suffix;
           } else {
             return 'n/a';
@@ -667,14 +671,14 @@ export function columnChartTips(tipNodes, innerTipEls, obj) {
     .text(d => {
       if (!obj.yAxis.prefix) { obj.yAxis.prefix = ''; }
       if (!obj.yAxis.suffix) { obj.yAxis.suffix = ''; }
-      if (d.val && d.val !== '__undefined__') {
+      if ((d.val || d.val === 0) && d.val !== '__undefined__') {
         return obj.yAxis.prefix + yFormatter(obj.yAxis.format, d.val) + obj.yAxis.suffix;
       } else {
         return 'n/a';
       }
     })
     .classed(`${obj.prefix}muted`, d => {
-      return (!d.val || d.val === '__undefined__');
+      return (!(d.val || d.val === 0) || d.val === '__undefined__');
     });
 
   obj.rendered.plot.seriesGroup.selectAll('rect')
