@@ -134,7 +134,7 @@
     "thumbnailWidth": 460
   },
 
-  "embedJS": "//graphics.stltoday.com/bin/chart-tool/1.2.0/chart-tool.min.js",
-  "embedCSS": "//graphics.stltoday.com/bin/chart-tool/1.2.0/chart-tool.min.css"
+  "embedJS": "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.js",
+  "embedCSS": "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.css"
 
 }
