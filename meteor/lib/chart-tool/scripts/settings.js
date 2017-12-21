@@ -16,11 +16,11 @@ var xAxis = {"display":true,"scale":"time","ticks":"auto","orient":"bottom","for
 var barHeight = 25;
 var barLabelOffset = 6;
 var bands = {"padding":0.12,"offset":0.06,"outerPadding":0.06};
-var source = {"prefix":"CHART TOOL","suffix":" » SOURCE:"};
-var social = {"facebook":{"label":"Facebook","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg","redirect":"","appID":""},"twitter":{"label":"Twitter","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg","via":"","hashtag":""},"email":{"label":"Email","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg"},"sms":{"label":"SMS","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-telephone.svg"}};
+var source = {"prefix":"SOURCE: ","suffix":""};
+var social = {"facebook":{"label":"Facebook","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg","redirect":"","appID":"205112096200104"},"twitter":{"label":"Twitter","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg","via":"stltoday","hashtag":""},"email":{"label":"Email","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg"},"sms":{"label":"SMS","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-telephone.svg"}};
 var image = {"enable":false,"base_path":"","expiration":30000,"filename":"thumbnail","extension":"png","thumbnailWidth":460};
-var embedJS = "http://beta.images.theglobeandmail.com/static/templates/tools/chart-tool/1.2.0/chart-tool.min.js";
-var embedCSS = "http://beta.images.theglobeandmail.com/static/templates/tools/chart-tool/1.2.0/chart-tool.min.css";
+var embedJS = "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.js";
+var embedCSS = "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.css";
 var config = {
 	CUSTOM: CUSTOM,
 	prefix: prefix$1,
@@ -87,7 +87,7 @@ app_settings = {
   // name to this array and charts will be classed using this name
   palettes: ['Primary', 'Alternate', 'Grayscale'],
 
-  help: 'https://github.com/globeandmail/chart-tool/tree/master/README.md',
+  help: 'http://staging.graphics.stltoday.com/apps/docs-charttool/',
 
   chart: {
     version: app_version,
