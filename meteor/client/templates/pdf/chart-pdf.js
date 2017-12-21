@@ -2,10 +2,18 @@ Template.chartPdf.rendered = function() {
   var data = Router.current() && Router.current().data();
   if (data) {
 
+    var width, height;
+
     var magicW = app_settings.print.magic.width,
-        magicH = app_settings.print.magic.height,
-        width = determineWidth(data.print.columns) * magicW, // in px
-        height = determineHeight(data.print.lines, width) * magicH; // in px
+        magicH = app_settings.print.magic.height;
+
+    if (data.print.mode === 'millimetres') {
+      width = data.print.width * magicW;
+      height = data.print.height * magicH;
+    } else {
+      width = determineWidth(data.print.columns) * magicW;
+      height = determineHeight(data.print.lines, width) * magicH;
+    }
 
     data.exportable = {
       width: width,

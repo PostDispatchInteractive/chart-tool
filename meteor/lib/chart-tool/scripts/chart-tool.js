@@ -1,4 +1,4 @@
-/* Chart Tool v1.2.2-0 | https://github.com/globeandmail/chart-tool | MIT */
+/* Chart Tool v1.2.3-0 | https://github.com/globeandmail/chart-tool | MIT */
 var ChartToolInit = (function () {
 'use strict';
 
@@ -4157,7 +4157,7 @@ var bands = {"padding":0.12,"offset":0.06,"outerPadding":0.06};
 var social = {"facebook":{"label":"Facebook","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-facebook.svg","redirect":"","appID":""},"twitter":{"label":"Twitter","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-social-twitter.svg","via":"","hashtag":""},"email":{"label":"Email","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-mail.svg"},"sms":{"label":"SMS","icon":"https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-telephone.svg"}};
 var image = {"enable":false,"base_path":"","expiration":30000,"filename":"thumbnail","extension":"png","thumbnailWidth":460};
 
-var version = "1.2.2";
+var version = "1.2.3";
 var buildVer = "0";
 
 var chartSettings = {
@@ -6972,13 +6972,13 @@ function timeDiff(d1, d2, tolerance, data) {
   // i've got 99 problems but an if/else ain't one
 
   // data passed in, looking at drawing tips
-  if (data && ctx === 'years' || ctx === 'months') {
+  if (data && (ctx === 'years' || ctx === 'months')) {
     var uniqueDayValues = data.uniqueDayValues;
     var uniqueMonthValues = data.uniqueMonthValues;
 
     if (ctx === 'years') {
       // if only one unique day value, but multiple unique month values, probably monthly data
-      if (uniqueDayValues.length === 1 && uniqueMonthValues.length > 1) { ctx == 'monthly'; }
+      if (uniqueDayValues.length === 1 && uniqueMonthValues.length > 1) { ctx = 'monthly'; }
       // if many unique day values and multiple unique month values, probably months data
       if (uniqueDayValues.length > 1 && uniqueMonthValues.length > 1) { ctx = 'months'; }
     }
@@ -10850,7 +10850,7 @@ function getTipData(obj, cursor) {
     var step = scale.step(),
       domainPosition = Math.floor(cursorVal / step);
 
-    if (domainPosition > scale.domain().length) {
+    if (domainPosition >= scale.domain().length) {
       xVal = scale.domain()[scale.domain().length - 1];
     } else {
       xVal = scale.domain()[domainPosition];
@@ -11154,8 +11154,8 @@ function lineChartTips(tipNodes, innerTipEls, obj) {
 
   if (!isUndefined) {
 
-    var domain = obj.rendered.plot.xScaleObj.scale.domain();
-    var ctx = timeDiff(domain[0], domain[domain.length - 1], 8, obj.data);
+    var domain = obj.rendered.plot.xScaleObj.scale.domain(),
+      ctx = timeDiff(domain[0], domain[domain.length - 1], 8, obj.data);
 
     tipNodes.tipGroup.selectAll(("." + (obj.prefix) + "tip_text-group text"))
       .data(tipData.series)

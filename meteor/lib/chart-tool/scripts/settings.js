@@ -48,7 +48,7 @@ var config = {
 };
 
 var name = "chart-tool";
-var version = "1.2.2";
+var version = "1.2.3";
 var buildVer = "0";
 
 app_version = version;
@@ -161,7 +161,10 @@ app_settings = {
     img: '',
     print: {
       columns: '2col',
-      lines: 20
+      lines: 20,
+      width: '',
+      height: '',
+      mode: 'columns'
     }
 
   },
