@@ -73,3 +73,39 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 		- Follow steps I.1 through I.3 to reboot the server.
 	* DONE!
 
+## III. Miscellaneous server settings
+
+There are two users on the server: `root` and `charttool`
+
+The root user is used for making changes to the server config, or for rebooting the machine. The charttool user owns and executes the Chart Tool meteor app.
+
+### Home directories
+
+* charttool: `/home/chartool/`
+* root: `/root/`
+
+### nginx
+
+The Chart Tool machine uses `nginx` as its web server. 
+
+To change the web server settings, edit this file: `/etc/nginx/sites-available/chart-tool`
+
+Things you can do: 
+* Limit IP ranges that can access the server (currently only IP ranges within Lee Enterprises are allowed access)
+* Configure proxy headers that get passed to Meteor
+
+
+### Upstart
+
+This is a system for starting tasks on boot. We use one of these to initialize the Chart Tool Meteor app, and load specific environment variables.
+
+To change the charttool task, edit this file: `/etc/init/chart-tool.conf`
+
+
+### Mongo DB
+
+The Mongo conf files are:
+* `/etc/mongod.conf`
+* `/etc/mongodb.conf`
+
+
