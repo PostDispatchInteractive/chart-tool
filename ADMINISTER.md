@@ -35,7 +35,7 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 		- Change to fork's directory: `cd chart-tool`
 		- Pull changes from G&M, then push to local fork repo: `git pull upstream master && git push origin master`
 	* Pull changes from local chart-tool fork to customized chart-tool-pd
-		- Change to chart-tool-p directory: `cd chart-tool`
+		- Change to chart-tool-pd directory: `cd ..` and `cd chart-tool`
 		- Make a backup copy of customizations: `cp -R custom ~/Desktop/custom/`
 		- Try to pull changes from local chart-tool fork: `git pull upstream master`
 			- If you get an error like this: "Your local changes to the following files would be overwritten by merge", then stash those changes (`git stash`) and repeat the pull.
