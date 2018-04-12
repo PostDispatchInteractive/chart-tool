@@ -9,6 +9,7 @@
   "tipTimeout": 5000,
   "ratioMobile": 1.15,
   "ratioDesktop": 0.65,
+  "thumbnailDebounce": 1500,
 
   "dateFormat": "%Y-%m-%d",
   "timeFormat": "%H:%M",
@@ -134,7 +135,7 @@
     "thumbnailWidth": 460
   },
 
-  "embedJS": "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.js",
-  "embedCSS": "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.css"
+  "embedJS": "//graphics.stltoday.com/bin/chart-tool/{{version}}/chart-tool.min.js",
+  "embedCSS": "//graphics.stltoday.com/bin/chart-tool/{{version}}/chart-tool.min.css"
 
 }
