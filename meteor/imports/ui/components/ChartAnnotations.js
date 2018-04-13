@@ -3,6 +3,7 @@ import { TwitterPicker as ColorPicker } from 'react-color';
 import { updateAndSave, dataParse } from '../../modules/utils';
 import { app_settings } from '../../modules/settings';
 import { parse } from '../../modules/chart-tool';
+import { timeFormat } from 'd3-time-format';
 import Swal from 'sweetalert2';
 
 export default class ChartAnnotations extends Component {
@@ -110,14 +111,10 @@ export default class ChartAnnotations extends Component {
   //   ],
   //   range: [
   //     {
-  //       mode: 'xAxis',
-  //       x1: 'DATE',
-  //       x2: 'DATE' // optional
-  //     },
-  //     {
-  //       mode: 'yAxis',
-  //       y1: 'DATE',
-  //       y2: 'DATE' // optional
+  //       axis: 'x|y',
+  //       style: '',
+  //       start: 'DATE',
+  //       end: 'DATE' // optional
   //     }
   //   ],
   //   text: [
@@ -155,19 +152,26 @@ export default class ChartAnnotations extends Component {
                 triangle={'hide'}
                 colors={app_settings.highlightOptions}
                 onChangeComplete={this.props.handleHighlightColor}
+                color={this.props.currentAnnotation.highlight}
                 width={'100%'}
+                className={'color-picker'}
               />
               {this.currentHighlights() ?
                 <div className='currently-highlighted'>
                   <p>Currently highlighted</p>
                   <ul>
                   {this.props.chart.annotations.highlight.map(d => {
+                    const formatTime = timeFormat(this.props.chart.date_format);
+                    let keyText = d.key;
+                    if (this.props.chart.x_axis.scale === 'time' || this.props.chart.x_axis.scale === 'ordinal-time') {
+                      keyText = formatTime(new Date(d.key));
+                    }
                     return (
                       <li className='highlight-item' key={d.key}>
                         <div className='highlight-color' style={{ backgroundColor: d.color }}>
                           <button className='highlight-remove' value={d.key} onClick={this.removeHighlight}>&times;</button>
                         </div>
-                        <div className='highlight-key'>{d.key}</div>
+                        <div className='highlight-key'>{keyText}</div>
                       </li>
                     );
                   })}
