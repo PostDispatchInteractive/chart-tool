@@ -141,8 +141,9 @@ $nine-pt: ptToPx(9);
     font-family: 'Amplitude';
     font-style: normal;
     font-weight: 400;
-    padding-left: 20px;
-    padding-right: 6px;
+    display: block;
+    padding-right: 0;
+    padding-left: 0;
     height: auto;
     font-size: ptToPx(9);
     line-height: ptToPx(10.5);
@@ -151,12 +152,6 @@ $nine-pt: ptToPx(9);
     padding-bottom: 0;
     color: $color-black;
     margin-top: ptToPx(10.5);
-  }
-
-  .#{$prefix}chart_qualifier-bar {
-    display: block;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .#{$prefix}chart_source {

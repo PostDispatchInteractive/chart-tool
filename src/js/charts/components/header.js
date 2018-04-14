@@ -28,12 +28,12 @@ export default function header(container, obj) {
 
   let qualifier;
 
-  if ((obj.qualifier !== '' || obj.editable) &&  obj.options.qualifier) {
+  if ((obj.qualifier !== '' || obj.editable) && obj.options.qualifier) {
     qualifier = headerGroup
       .append('div')
       .attrs({
         'class': () => {
-          let str = `${obj.prefix}chart_qualifier ${obj.prefix}chart_qualifier-bar`;
+          let str = `${obj.prefix}chart_qualifier`;
           if (obj.editable) { str += ' editable-chart_qualifier'; }
           return str;
         },
