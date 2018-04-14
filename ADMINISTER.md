@@ -35,7 +35,7 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 		- Change to fork's directory: `cd chart-tool`
 		- Pull changes from G&M, then push to local fork repo: `git pull upstream master && git push origin master`
 	* Pull changes from local chart-tool fork to customized chart-tool-pd
-		- Change to chart-tool-pd directory: `cd ..` and `cd chart-tool`
+		- Change to chart-tool-pd directory: `cd ..` and `cd chart-tool-pd`
 		- Make a backup copy of customizations: `cp -R custom ~/Desktop/custom/`
 		- Try to pull changes from local chart-tool fork: `git pull upstream master`
 			- If you get an error like this: "Your local changes to the following files would be overwritten by merge", then stash those changes (`git stash`) and repeat the pull.
@@ -45,9 +45,9 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 		- Open each changed `chart-tool-pd/custom/` file in a text editor, and compare it with its equivalent in the backup `Desktop/custom/` you made earlier.
 		- Often the only changes will be additions: new JSON fields, etc. If that's the case, we're finished.
 		- If there are CHANGES to fields that have P-D-specific values, then add back our P-D values to the `/chart-tool-pd/custom/` version of the file. Examples:
-			- `  help: 'http://staging.graphics.stltoday.com/apps/docs-charttool/',`
-			- `  "embedJS": "//graphics.stltoday.com/bin/chart-tool/1.2.2-0/chart-tool.min.js"`
-			- `    "prefix": "SOURCE: "`
+			- `  help: 'http://staging.graphics.stltoday.com/apps/docs-charttool/'`
+			- `  "embedJS": "//graphics.stltoday.com/bin/chart-tool/{{version}}/chart-tool.min.js"`
+			- `  "prefix": "SOURCE: "`
 			- Almost anything in the .scss files
 	* Now that we have pulled down updates and integrated our customizations, save the changes.
 		- Make a commit and push changes to chart-tool-pd repo: 
@@ -64,7 +64,7 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 	* Transfer meteor.tar.gz to Chart Tool server.
 		- `rsync -vaz meteor/meteor.tar.gz charttool@charts.post-dispatch.com:/home/charttool/`
 	* Transfer .js and .css to Graphics server.
-		- (Make sure version number listed in following command matches the version number in the `embedJS` field at the bottom of `/custom/chart-tool-config.json`.)
+		- (Make sure version number listed in following command matches the version number of the bundle directory.)
 		- `rsync -vaz chart-tool.min.{css,js} newsroom@graphics.stltoday.com:/home/newsroom/graphics.stltoday.com/public_html/bin/chart-tool/1.2.3-0/`
 	* Unzip and deploy new code on Chart Tool server.
 		- SSH to server: `ssh charttool@charts.post-dispatch.com`
