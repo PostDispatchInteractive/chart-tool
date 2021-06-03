@@ -32,7 +32,7 @@ export const app_settings = {
     '#ce6dbd'
   ],
 
-  help: 'http://staging-graphics.stltoday.com/docs/charttool/',
+  help: 'https://staging-graphics.stltoday.com/docs/charttool/',
 
   chart: {
     version: app_version,
