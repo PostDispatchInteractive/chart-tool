@@ -59,9 +59,22 @@ $grayscale-shade-3: #A7A7A7;
 $grayscale-shade-4: #dedede;
 $grayscaleShades: $grayscale-color, $grayscale-shade-1, $grayscale-shade-2, $grayscale-shade-3, $grayscale-shade-4;
 
-$palette-count: 3;
-$palette-names: 'primary', 'alternate', 'grayscale';
-$palettes: $primaryShades, $alternateShades, $grayscaleShades;
+$qualpair-color: #000000;
+$qualpair-shade-1: rgb(227,26,28);
+$qualpair-shade-2: rgb(251,154,153);
+$qualpair-shade-3: rgb(31,120,180);
+$qualpair-shade-4: rgb(166,206,227);
+$qualpair-shade-5: rgb(51,160,44);
+$qualpair-shade-6: rgb(178,223,138);
+$qualpair-shade-7: rgb(255,127,0);
+$qualpair-shade-8: rgb(253,191,111);
+
+$qualpairShades: $qualpair-color, $qualpair-shade-1, $qualpair-shade-2, $qualpair-shade-3, $qualpair-shade-4, $qualpair-shade-5, $qualpair-shade-6, $qualpair-shade-7, $qualpair-shade-8;
+
+
+$palette-count: 4;
+$palette-names: 'primary', 'alternate', 'grayscale', 'qualitativepairs';
+$palettes: $primaryShades, $alternateShades, $grayscaleShades, $qualpairShades;
 
 // Other colors
 $color-black: #111111;
