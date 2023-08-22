@@ -11,7 +11,10 @@
 h2.edit-indicator { display: none; }
 
 // Avoid text wrapping problem in Firefox
+// CT defaults to no-wrap, but in FF this leads to collapsing and removal of newlines.
+textarea.input-data { white-space: pre-wrap; }
 textarea.input-data-edit { white-space: pre-wrap; }
+textarea.memo-field { white-space: pre-wrap; }
 
 // Make the annotation x-axis line dashed
 .#{$prefix}annotation_range-line {
