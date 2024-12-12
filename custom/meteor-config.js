@@ -17,7 +17,7 @@ export const app_settings = {
 
   // if you want to add more colour palettes, just add their
   // name to this array and charts will be classed using this name
-  palettes: ['Primary', 'Alternate', 'Grayscale','QualitativePairs'],
+  palettes: ['Primary', 'Secondary', 'Alternate', 'Grayscale', 'QualitativePairs', 'Extended'],
 
   highlightOptions: [
     '#1f77b4',
