@@ -24,8 +24,9 @@
 
 .#{$prefix}annotation_range-line {
   opacity: 1;
-  stroke: $color-black;
+  stroke: $color-gray-medium;
   stroke-width: 2px;
+  stroke-dasharray: 4,4;
   stroke-linecap: butt;
   shape-rendering: crispEdges;
 }
