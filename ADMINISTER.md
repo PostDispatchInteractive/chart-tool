@@ -61,6 +61,7 @@ These steps can be completed ONLY by users listed in I.1 above, since their SSH 
 3. How to build new Chart Tool code and deploy to server
 	* You should still be in the `/chart-tool-pd/` directory
 	* Build bundle with new server code: `gulp build`
+		- (If this produces errors, you may be running the wrong Node version. Use `nvm` to switch to v8.11.1)
 	* Change to the new bundle's directory:
 		- Change to distribution folder: `cd dist`
 		- Note the highest-numbered version folder you see after running this command: `ls -la`
