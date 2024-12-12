@@ -38,13 +38,39 @@ $utility-font-letter-spacing: 0px;
 }
 
 // Color palettes
-$primary-color: #1f77b4;
-$primary-shade-1: #ff7f0e;
-$primary-shade-2: #bcbd22;
-$primary-shade-3: #8c564b;
-$primary-shade-4: #7f7f7f;
+$primary-color: #1f77b4; // blue
+$primary-shade-1: #ff7f0e; // orange
+$primary-shade-2: #bcbd22; // green-yellow
+$primary-shade-3: #8c564b; // brown
+$primary-shade-4: #7f7f7f; // gray
 $primaryShades: $primary-color, $primary-shade-1, $primary-shade-2, $primary-shade-3, $primary-shade-4;
 
+// This Secondary palette is the continuation of the Primary palette (which is originally 10 colors).
+// The idea is that you can use them in two charts side-by-side, so no colors are repeated.
+$secondary-color: #9467bd; // purple
+$secondary-shade-1: #17becf; // cyan
+$secondary-shade-2: #d62728; // red
+$secondary-shade-3: #2ca02c; // green
+$secondary-shade-4: #e377c2; // pink
+$secondaryShades: $secondary-color, $secondary-shade-1, $secondary-shade-2, $secondary-shade-3, $secondary-shade-4;
+
+
+// This Extended palette is much larger. It contains 12 values. It uses soft colors, and is based on Microcharts. https://github.com/microcharts-dotnet/Microcharts
+$extended-color: #266489; // Lapis lazuli (blue)
+$extended-color-1: #68B9C0; // Verdigris (cyan)
+$extended-color-2: #90D585; // Pistachio (green)
+$extended-color-3: #F3C151; // Saffron (gold)
+$extended-color-4: #F37F64; // Burnt sienna (red)
+$extended-color-5: #8F97A4; // Cadet gray (light gray, bluish)
+$extended-color-6: #DAC096; // Tan
+$extended-color-7: #76846E; // Reseda green (light olive green)
+$extended-color-8: #424856; // Charcoal (dark gray, bluish)
+$extended-color-9: #DABFAF; // Desert sand (light orange brown)
+$extended-color-10: #A65B69; // China rose (dark pink)
+$extended-color-11: #97A69D; // Ash gray (light green gray)
+$extendedShades: $extended-color, $extended-color-1, $extended-color-2, $extended-color-3, $extended-color-4, $extended-color-5, $extended-color-6, $extended-color-7, $extended-color-8, $extended-color-9, $extended-color-10, $extended-color-11;
+
+// The alternate palette is a soft, five-color, rainbow-order palette.
 $alternate-color: #6b6ecf;
 $alternate-shade-1: #b5cf6b;
 $alternate-shade-2: #e7ba52;
@@ -59,22 +85,20 @@ $grayscale-shade-3: #A7A7A7;
 $grayscale-shade-4: #dedede;
 $grayscaleShades: $grayscale-color, $grayscale-shade-1, $grayscale-shade-2, $grayscale-shade-3, $grayscale-shade-4;
 
-$qualpair-color: #000000;
-$qualpair-shade-1: rgb(227,26,28);
-$qualpair-shade-2: rgb(251,154,153);
-$qualpair-shade-3: rgb(31,120,180);
-$qualpair-shade-4: rgb(166,206,227);
-$qualpair-shade-5: rgb(51,160,44);
-$qualpair-shade-6: rgb(178,223,138);
-$qualpair-shade-7: rgb(255,127,0);
-$qualpair-shade-8: rgb(253,191,111);
+// A sequence of four pairs. Each pair consists of one color in a stronger and a lighter shade.
+$qualpair-color: rgb(227,26,28);
+$qualpair-shade-1: rgb(244,164,165);
+$qualpair-shade-2: rgb(31,120,180);
+$qualpair-shade-3: rgb(169,211,239);
+$qualpair-shade-4: rgb(51,160,44);
+$qualpair-shade-5: rgb(179,232,176);
+$qualpair-shade-6: rgb(255,127,0);
+$qualpair-shade-7: rgb(255,229,204);
+$qualpairShades: $qualpair-color, $qualpair-shade-1, $qualpair-shade-2, $qualpair-shade-3, $qualpair-shade-4, $qualpair-shade-5, $qualpair-shade-6, $qualpair-shade-7;
 
-$qualpairShades: $qualpair-color, $qualpair-shade-1, $qualpair-shade-2, $qualpair-shade-3, $qualpair-shade-4, $qualpair-shade-5, $qualpair-shade-6, $qualpair-shade-7, $qualpair-shade-8;
-
-
-$palette-count: 4;
-$palette-names: 'primary', 'alternate', 'grayscale', 'qualitativepairs';
-$palettes: $primaryShades, $alternateShades, $grayscaleShades, $qualpairShades;
+$palette-count: 6;
+$palette-names: 'primary', 'alternate', 'grayscale', 'qualitativepairs', 'secondary', 'extended';
+$palettes: $primaryShades, $alternateShades, $grayscaleShades, $qualpairShades, $secondaryShades, $extendedShades;
 
 // Other colors
 $color-black: #111111;
@@ -97,4 +121,4 @@ $axis-stroke-width: 1px;
 $axis-stroke-dasharray: 1, 3px;
 $line-stroke-width: 2.5px;
 
-$series-count-max: 5;
+$series-count-max: 12;
